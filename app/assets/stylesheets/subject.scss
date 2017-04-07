@@ -62,4 +62,11 @@ $accent-color: #FFCD1F;
   md-card:hover .md-subhead{
     color: $accent-color;
   }
+  .button-next{
+    margin-top: -42px;
+  }
+  .layout-wrap.layout-sm-column
+    .md-fab.md-primary.md-button.md-ink-ripple {
+    margin: 0 50px;
+  }
 }
