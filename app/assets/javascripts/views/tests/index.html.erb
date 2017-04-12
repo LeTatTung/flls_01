@@ -1,0 +1,77 @@
+<div class="col-sm-12 ltt-subject">
+  <div class="col-sm-3 sidebar">
+    <md-list dense>
+      <md-card-title-text>
+        <md-button ng-click= "backPage()" class="md-icon-button md-primary"
+          aria-label="Settings">
+          <i class="fa fa-backward" aria-hidden="true"></i>
+        </md-button>
+        <span class="md-subhead"><%= I18n.t "test.back" %></span>
+      </md-card-title-text>
+      <hr>
+      <md-card-title-text>
+        <md-button class="md-icon-button md-primary" aria-label="Settings">
+          <i class="fa fa-spinner" aria-hidden="true"></i>
+        </md-button>
+        <span class="md-subhead"><%= I18n.t "test.process" %></span>
+      </md-card-title-text>
+      <md-slider ng-model="invert" min="0" max="100" aria-label="regular slider"></md-slider>
+      <div class="test-process">{{ selected.length }} / {{ list_questions.length }}</div>
+      <hr>
+      <md-card-title-text>
+        <md-button class="md-icon-button md-primary" aria-label="Settings">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        </md-button>
+        <span class="md-subhead">
+          <span>
+            <%= I18n.t "test.result" %>
+          </span>
+          <p class="test-result">
+            {{ getResult() }} %
+          </p>
+        </span>
+      </md-card-title-text>
+      <hr>
+      <section class="col-sm-12 button" layout="column" layout-align="center">
+        <md-button ng-click="print()" class="md-raised">
+          <i class="fa fa-play" aria-hidden="true"></i>
+          <%= I18n.t "test.print" %>
+        </md-button>
+        <md-button class="md-raised md-warn">
+          <i class="fa fa-list-ul" aria-hidden="true"></i>
+          <%= I18n.t "test.options" %>
+        </md-button>
+      </section>
+    </md-list>
+  </div>
+  <div class="col-sm-9 stage">
+    <h2><%= I18n.t "test.title" %></h2>
+    <form name="questionsForm" ng-submit="submit()">
+      <input type="hidden">
+      <ul>
+        <li ng-repeat="question in list_questions" class="question">
+          <b>{{ question.id + 1 }} . {{ question.description }}</b>
+          <ul>
+            <li ng-repeat="answer in question.answers">
+              <span style="{{changeColor(answer.id)}}">
+                <label ng-click="selectedQuestions(question.id)">
+                  <input type="radio" name="option_question_{{ question.id }}"
+                    ng-model="question.selected_id" ng-value="answer.id"/>
+                  {{ answer.description }}
+                </label>
+              </span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </form>
+    <div class="row">
+      <div class="col-sm-12" layout="column" layout-align="center">
+        <md-button class="md-raised md-primary btn-lg"
+          ng-click="submit()" ng-if="canSubmit">
+          <%= I18n.t "test.submit" %>
+        </md-button>
+      </div>
+    </div>
+  </div>
+</div>
