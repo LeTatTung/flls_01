@@ -16,7 +16,8 @@
       </md-card>
     </div>
     <div class="col-lg-3 col-md-4 col-xs-6 col-sm-4">
-      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch
+        ng-click="test()">
         <md-card-title>
           <md-card-title-text>
           <span class="md-headline">
@@ -77,13 +78,13 @@
         </md-list-item>
       </md-list>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12" layout="column" layout-align="center">
-      <md-button class="md-raised md-primary btn-lg"
-        ng-click="loadMore()" ng-if="canLoadMoreData">
-        <%= I18n.t "subjects.load_more" %>
-      </md-button>
+    <div class="row">
+      <div class="col-sm-12" layout="column" layout-align="center">
+        <md-button class="md-raised md-primary btn-lg"
+          ng-click="loadMore()" ng-if="canLoadMoreData">
+          <%= I18n.t "subjects.load_more" %>
+        </md-button>
+      </div>
     </div>
   </div>
 </div>

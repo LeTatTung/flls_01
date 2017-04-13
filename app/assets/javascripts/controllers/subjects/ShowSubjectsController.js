@@ -29,6 +29,10 @@ app
       $state.go('subjects.subject.flash_card',
         {subject_id: subject_id})
     };
+    $scope.test = function () {
+      $state.go('subjects.subject.test',
+        {subject_id: subject_id})
+    };
     /**
      * Run controller
      */

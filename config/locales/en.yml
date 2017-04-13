@@ -99,5 +99,13 @@ en:
     play: "Play"
     shuffle: "Shuffle"
     options: "Options"
+  test:
+    back: "Back"
+    process: "Process"
+    result: "Result"
+    print: "Print"
+    options: "Options"
+    submit: "Submit"
+    title: "5 Multiple choice questions"
   error:
     permission_denied: "Permission denied !"

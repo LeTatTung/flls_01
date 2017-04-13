@@ -114,6 +114,15 @@ app
           }
         }
       })
+      .state('subjects.subject.test', {
+        url: '/test',
+        views: {
+          'content@subjects': {
+            templateUrl: 'views/tests/index.html',
+            controller: 'TestsController'
+          }
+        }
+      })
       .state('home', {
         url: '/home',
         views: {
