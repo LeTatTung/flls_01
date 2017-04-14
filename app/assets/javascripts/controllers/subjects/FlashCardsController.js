@@ -73,6 +73,8 @@ app
         $scope.subject.words_limit[currentIndex] = $scope.subject.words_limit[randomIndex];
         $scope.subject.words_limit[randomIndex] = temporaryValue;
       }
+      $scope.cardIndex = 0;
+      $scope.invert = 0;
       $scope.changeDataCard(0);
       return $scope.subject.words_limit;
     };

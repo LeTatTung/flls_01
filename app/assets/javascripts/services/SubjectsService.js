@@ -1,7 +1,8 @@
 app.service('Subjects', function ($http, $q, $state) {
-  this.index = function (user_id) {
+  this.index = function (user_id, searchData) {
     var deferred = $q.defer();
-    var promise = $http.get(app.basePath + 'users/' + user_id + '/subjects').then(function (response) {
+    var promise = $http.get(app.basePath + 'users/' + user_id +
+      '/subjects?search_data=' + searchData).then(function (response) {
       deferred.resolve(response.data.data);
     }, function (response) {
       $state.go('user_not_found');
