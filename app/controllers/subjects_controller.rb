@@ -4,11 +4,16 @@ class SubjectsController < ApplicationController
   before_action :find_subject, only: :show
 
   def index
-    @subjects = if current_user && current_user.id == @user.id
-      current_user.subjects
+    @subjects = if current_user && !params[:search_data].empty?
+      Subject.searchSubject current_user.id, params[:search_data]
     else
-      @user.subjects.public_subjects
+      if current_user && current_user.id == @user.id
+        current_user.subjects
+      else
+        @user.subjects.public_subjects
+      end
     end
+
     render json: {
       status: 200,
       error: false,

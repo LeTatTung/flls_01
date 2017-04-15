@@ -25,7 +25,7 @@
             <md-input-container class="md-block">
               <label><%= I18n.t "navbar.search" %></label>
               <md-icon md-font-icon="fa fa-search fa-fw fa-2x" class="name"></md-icon>
-              <input ng-model="search" title="<%= I18n.t "navbar.search" %>">
+              <input ng-enter="getDataSearch()" ng-model="search" title="<%= I18n.t "navbar.search" %>">
             </md-input-container>
           </form>
         </li>

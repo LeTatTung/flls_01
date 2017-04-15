@@ -18,4 +18,12 @@ class Subject < ApplicationRecord
   def count_words
     self.words.count
   end
+
+  class << self
+    def searchSubject user_id, search_data
+      sql = "(user_id = ? OR (user_id != ? AND permission =
+        0)) AND lower(name) LIKE ?", user_id, user_id, "%#{search_data.downcase}%"
+      subjects = Subject.where sql
+    end
+  end
 end

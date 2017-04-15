@@ -100,7 +100,6 @@ app
         },
         resolve: {
           subject_id: function ($stateParams) {
-            console.log($stateParams.subject_id);
             return $stateParams.subject_id
           }
         }
@@ -120,6 +119,15 @@ app
           'content@subjects': {
             templateUrl: 'views/tests/index.html',
             controller: 'TestsController'
+          }
+        }
+      })
+      .state('subjects.search', {
+        url: '/{search: string}',
+        views: {
+          'content@subjects': {
+            templateUrl: 'views/subjects/index.html',
+            controller: 'NavbarController'
           }
         }
       })
@@ -179,13 +187,13 @@ app
           }
         }
       })
-    .state('permission_denied', {
-      url: '/errors/permission_denied',
-      views: {
-        'main': {
-          templateUrl: 'views/errors/permission_denied.html'
+      .state('permission_denied', {
+        url: '/errors/permission_denied',
+        views: {
+          'main': {
+            templateUrl: 'views/errors/permission_denied.html'
+          }
         }
-      }
-    });
+      });
     $urlRouterProvider.otherwise('/welcome');
   });
