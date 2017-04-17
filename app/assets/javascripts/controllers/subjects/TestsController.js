@@ -1,5 +1,5 @@
 app
-  .controller('TestsController', function ($scope, $state, $stateParams,
+  .controller('TestsController', function ($rootScope, $scope, $state, $stateParams,
     Auth, Subjects,Words, subject_id) {
 
     $scope.canSubmit = true;
@@ -12,18 +12,38 @@ app
       $scope.answer_id = 1;
       $scope.selected = [];
       $scope.countCorrect = 0;
-      $scope.record_id = 0;
+      $scope.arrIndex = [];
+      $scope.record_id = Math.floor(Math.random() *
+        ($rootScope.count_words - app.limit_word_record));
       Words.index(subject_id, $scope.record_id).then(function(data) {
         $scope.data = data;
-        $scope.record_id = data.slice(-1).pop().id;
         for (var i = 0; i < $scope.data.length; i++){
-          $scope.createQuestion(i);
+          $scope.arrIndex.push(i);
+        }
+        for (var i = 0; i < $scope.data.length; i++){
+          $scope.createQuestion($scope.arrIndex, i);
         }
       });
     };
 
-    $scope.createQuestion = function (index_question) {
+    $scope.arrRandom = function (arr, diff) {
+      var arrCopy = arr.slice();
+      var arrRandom = [];
       var count = 0;
+      var i = 0;
+      while (i < arrCopy.length){
+        if (count == 3) break;
+        i = Math.floor(Math.random() * arrCopy.length);
+        if (arrCopy[i] != diff && arrCopy[i] >= 0){
+          arrRandom.push(arrCopy[i]);
+          delete arrCopy[i];
+          count ++;
+        }
+      }
+      return arrRandom;
+    };
+
+    $scope.createQuestion = function (arr, index_question) {
       var answer = {
         'id': null,
         'description': null
@@ -33,25 +53,22 @@ app
         'description': null,
         'answers': []
       };
+      var arrRandom = $scope.arrRandom(arr,index_question);
       question.id = index_question;
       question.description = $scope.data[index_question].word_content;
       answer.id = $scope.answer_id;
       $scope.correct_answers.push(answer.id);
       answer.description = $scope.data[index_question].definition_content
       question.answers.push(answer);
-      for (var i = 0; i < $scope.data.length ; i ++){
-        if (count == 3) break;
-        if (i != index_question){
-          $scope.answer_id ++;
-          var answer = {
-            'id': null,
-            'description': null
-          };
-          answer.id = $scope.answer_id;
-          answer.description = $scope.data[i].definition_content;
-          question.answers.push(answer);
-          count ++;
-        }
+      for (var i = 0; i < arrRandom.length; i++){
+        $scope.answer_id ++;
+        var answer = {
+          'id': null,
+          'description': null
+        };
+        answer.id = $scope.answer_id;
+        answer.description = $scope.data[arrRandom[i]].definition_content;
+        question.answers.push(answer);
       }
       $scope.answer_id ++;
       $scope.shuffleArray(question.answers);

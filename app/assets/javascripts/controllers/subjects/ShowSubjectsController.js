@@ -1,13 +1,15 @@
 app
-  .controller('ShowSubjectsController', function ($scope, $state, $stateParams, Auth, Subjects, Words, subject_id) {
+  .controller('ShowSubjectsController', function ($rootScope, $scope,
+    $state, $stateParams, Auth, Subjects, Words, subject_id) {
     $scope.canLoadMoreData = true;
     /**
      * Init data
      */
     $scope.init = function () {
       Subjects.show(subject_id).then(function(data){
-        $scope.subject = data;
+        $rootScope.subject = data;
         $scope.record_id = data.words_limit.slice(-1).pop().id;
+        $rootScope.count_words = $scope.subject.count_words;
       });
     };
     $scope.loadMore = function () {
